@@ -1,12 +1,12 @@
 :root {
-  --primary: #c0392b;
-  --primary-dark: #a93226;
-  --bg: #fafafa;
+  --primary: #e8164f;
+  --primary-dark: #60032a;
+  --bg: #fdf6eb;
   --card-bg: #fff;
-  --text: #333;
-  --text-light: #777;
-  --border: #e0e0e0;
-  --star: #f39c12;
+  --text: #3a3a37;
+  --text-light: #6b6b65;
+  --border: #e8e0d4;
+  --star: #ffa32b;
   --radius: 8px;
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   --max-width: 1100px;
@@ -19,7 +19,7 @@
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Gotham", "Segoe UI", system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -263,7 +263,7 @@ nav .nav-links a.active {
 .form-group select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(192, 57, 43, 0.15);
+  box-shadow: 0 0 0 2px rgba(232, 22, 79, 0.15);
 }
 
 .btn {
