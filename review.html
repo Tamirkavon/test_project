@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review - Restaurant Critics</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">Restaurant Critics</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="restaurants.html">Restaurants</a></li>
+      <li><a href="submit.html">Submit Review</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div id="restaurant-detail"></div>
+    <h2 class="section-title" style="margin-top:2rem;">Reviews</h2>
+    <div id="reviews-list"></div>
+  </div>
+
+  <footer>
+    &copy; 2026 Restaurant Critics
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    const id = Number(getParam("id"));
+    const restaurant = restaurants.find(r => r.id === id);
+
+    if (!restaurant) {
+      document.getElementById("restaurant-detail").innerHTML = "<p>Restaurant not found. <a href='restaurants.html'>Browse all restaurants</a></p>";
+    } else {
+      document.title = restaurant.name + " - Restaurant Critics";
+      const avg = getAverageRating(restaurant.id);
+
+      document.getElementById("restaurant-detail").innerHTML = `
+        <div class="restaurant-header">
+          <div style="font-size:3rem; margin-bottom:0.5rem;">${restaurant.emoji}</div>
+          <h1>${restaurant.name}</h1>
+          <div class="cuisine">${restaurant.cuisine}</div>
+          <div class="stars">${renderStars(avg)} <span style="color:#777; font-size:0.9rem;">(${avg})</span></div>
+          <p class="description">${restaurant.description}</p>
+        </div>
+      `;
+
+      const allReviews = getReviews(restaurant.id);
+      if (allReviews.length === 0) {
+        document.getElementById("reviews-list").innerHTML = "<p>No reviews yet. <a href='submit.html'>Be the first!</a></p>";
+      } else {
+        document.getElementById("reviews-list").innerHTML = allReviews.map(r => `
+          <div class="review-item">
+            <div class="review-meta">
+              <span class="reviewer">${r.reviewerName}</span>
+              <span class="review-date">${r.date}</span>
+            </div>
+            <div class="stars">${renderStars(r.rating)}</div>
+            <p class="review-text">${r.comment}</p>
+          </div>
+        `).join("");
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Review - Restaurant Critics</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">Restaurant Critics</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="restaurants.html">Restaurants</a></li>
+      <li><a href="submit.html" class="active">Submit Review</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2 class="section-title">Submit a Review</h2>
+    <div class="form-card">
+      <form id="review-form">
+        <div class="form-group">
+          <label for="restaurant">Restaurant</label>
+          <select id="restaurant" required>
+            <option value="">Select a restaurant...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="e.g. Jane D." required>
+        </div>
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <select id="rating" required>
+            <option value="">Select rating...</option>
+            <option value="5">5 - Excellent</option>
+            <option value="4">4 - Very Good</option>
+            <option value="3">3 - Good</option>
+            <option value="2">2 - Fair</option>
+            <option value="1">1 - Poor</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="comment">Your Review</label>
+          <textarea id="comment" placeholder="Tell us about your experience..." required></textarea>
+        </div>
+        <button type="submit" class="btn">Submit Review</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Restaurant Critics
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    // Populate restaurant dropdown
+    const select = document.getElementById("restaurant");
+    restaurants.forEach(r => {
+      const opt = document.createElement("option");
+      opt.value = r.id;
+      opt.textContent = r.name;
+      select.appendChild(opt);
+    });
+
+    // Pre-select if coming from a restaurant page
+    const preselect = getParam("id");
+    if (preselect) select.value = preselect;
+
+    // Handle form submit
+    document.getElementById("review-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const review = {
+        restaurantId: Number(document.getElementById("restaurant").value),
+        reviewerName: document.getElementById("name").value.trim(),
+        rating: Number(document.getElementById("rating").value),
+        comment: document.getElementById("comment").value.trim(),
+        date: new Date().toISOString().split("T")[0]
+      };
+
+      saveReview(review);
+      window.location.href = "review.html?id=" + review.restaurantId;
+    });
+  </script>
+</body>
+</html>

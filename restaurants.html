@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Restaurants - Restaurant Critics</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">Restaurant Critics</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="restaurants.html" class="active">Restaurants</a></li>
+      <li><a href="submit.html">Submit Review</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2 class="section-title">All Restaurants</h2>
+    <div class="cards" id="all-restaurants"></div>
+  </div>
+
+  <footer>
+    &copy; 2026 Restaurant Critics
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById("all-restaurants").innerHTML = restaurants.map(renderCard).join("");
+  </script>
+</body>
+</html>
